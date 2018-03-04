@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Friends</title>
+  <!-- Latest compiled and minified CSS & JS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <div class="jumbotron">
+     <center><h1>Friend Finder Blink</h1></center>
+     <center><h3>Find your friend...</h3></center>
+      <hr>
+      <center>
+          <a href="/survey"><button type="button" class="btn btn-danger btn-lg" ><span class="glyphicon glyphicon-plus">
+
+          </span> Start The Survey</button></a>          
+        
+    </div>
+    </div>
+  </div>
+        
+  <script type="text/javascript">
+    // Question: What does this code do?
+    $("#add-btn").on("click", function(event) {
+      event.preventDefault();
+      var newCharacter = {
+        name: $("#name").val().trim(),
+        email: $("#phone:").val().trim(),
+        phone: $("#email").val().trim(),
+        unique : $("#uniqueId").val().trim()
+      };
+      // Question: What does this code do??
+      $.post("/api/new", newCharacter)
+      .done(function(data) {
+        console.log(data);
+        alert("Adding character...");
+      });
+    });
+  </script>
+</body>
+<footer class="footer">
+<div class="container">
+<p>
+    <a href="/api/tables">API Friends List</a>
+    |
+    <a href="/api/waitlist">Github Repo</a>
+</p>
+</div>
+
+</footer>
+</html>
