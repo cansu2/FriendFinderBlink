@@ -6,10 +6,14 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.5.1/chosen.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
     <script src="https://code.jquery.com/jquery.js"></script>
-    <!-- <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script> -->
+    <!-- <script src="https://code.jquery.com/jquery-3.3.6.min.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.5.1/chosen.jquery.min.js"></script>
+
     <title>Friend Finder Blink - Survey</title>
 </head>
 
@@ -131,6 +135,17 @@
         <div class='col s4'>
             <p><a href='/api/friends'>API Friends List</a> | <a href='https://github.com/cansu2/FriendFinderBlink' target='_blank'>GitHub Repo</a></p>
         </div>
+        <div id="modal1" class="modal">
+            <div class="modal-content">
+          
+              <h4>Meet your new friend..</h4>
+              <h5 id="matchName"></h5>
+              <img id="matchPic" src="" alt="No Image" width = 250px>
+            </div>
+          <div class="modal-footer">
+            <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Done</a>
+          </div>
+          </div> 
 
     </div>
 
@@ -140,23 +155,16 @@
     var newFriend = {
       name: $('#name').val().trim(),
       photo: $('#photo').val().trim(),
-      scores: [
-              $('#q1').val(),
-              $('#q2').val(),
-              $('#q3').val(),
-              $('#q4').val(),
-              $('#q5').val(),
-              $('#q6').val(),
-              $('#q7').val(),
-              $('#q8').val(),
-              $('#q9').val(),
-              $('#q10').val(),     
-      ]
+      scores: [$('#q1').val(),$('#q2').val(),$('#q3').val(),$('#q4').val(),$('#q5').val(),$('#q6').val(),$('#q7').val(),$('#q8').val(),$('#q9').val(),$('#q10').val(),]
     };
 
     $.post("/api/friends", newFriend).done(function(data){
       console.log(data);
       alert("added");
+
+      $("#matchName").text(data.name);
+	  $("#matchPic").attr("src", data.photo);
+	  $("#modal1").modal("show");
     });
       
       $("#name").val("");
@@ -177,6 +185,8 @@
   
 
 </script>
+
 </body>
+
 
 </html>
